@@ -56,5 +56,10 @@ public class Main {
         if (room.checkIn()) {
             System.out.println("Another guest has successfully checked in.");
         }
+
+        Hotel myHotel = new Hotel("Sunrise Inn", 5, 10);
+
+        System.out.println("Suite available? " + myHotel.hasSuiteAvailable());
+        System.out.println("Basic room available? " + myHotel.hasBasicRoomAvailable());
     }
 }
