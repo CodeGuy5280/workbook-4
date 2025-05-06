@@ -1,5 +1,6 @@
 package com.pluralsight;
-//must be clean && unoccupied
+
+
 public class Room {
 
     private int NumberOfBeds;

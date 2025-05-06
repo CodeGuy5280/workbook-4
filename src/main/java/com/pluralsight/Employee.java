@@ -1,18 +1,15 @@
 package com.pluralsight;
 
-import java.time.LocalDateTime;
-
 public class Employee {
-    // Backing variables
     private int employeeId;
     private String name;
     private String department;
     private double payRate;
     private double hoursWorked;
+
     private double punchInTime;
     private double punchOutTime;
 
-    // Constructor
     public Employee(int employeeId, String name, String department, double payRate, double hoursWorked) {
         this.employeeId = employeeId;
         this.name = name;
@@ -20,60 +17,52 @@ public class Employee {
         this.payRate = payRate;
         this.hoursWorked = hoursWorked;
     }
-    // Regular hours = max 40
+
+    // Overloaded punchIn methods
+    public void punchIn(double time) {
+        punchInTime = time;
+        System.out.println(name + " punched in at " + punchInTime);
+    }
+
+    public void punchIn() {
+        punchInTime = 9.0; // Default start time
+        System.out.println(name + " punched in at default time " + punchInTime);
+    }
+
+    // Overloaded punchOut methods
+    public void punchOut(double time) {
+        punchOutTime = time;
+        calculateHoursWorked();
+        System.out.println(name + " punched out at " + punchOutTime);
+    }
+
+    public void punchOut() {
+        punchOutTime = 17.0; // Default end time
+        calculateHoursWorked();
+        System.out.println(name + " punched out at default time " + punchOutTime);
+    }
+
+    private void calculateHoursWorked() {
+        double worked = punchOutTime - punchInTime;
+        if (worked > 0) {
+            hoursWorked += worked;
+        }
+    }
+
+    // Payroll getters
+    public double getTotalPay() {
+        return payRate * hoursWorked;
+    }
+
     public double getRegularHours() {
         return Math.min(40, hoursWorked);
     }
 
-    // Overtime = hours above 40
     public double getOvertimeHours() {
         return Math.max(0, hoursWorked - 40);
-    }
-
-    // Total pay = regular pay + overtime (1.5x rate)
-    public double getTotalPay() {
-        return getRegularHours() * payRate + getOvertimeHours() * payRate * 1.5;
-    }
-
-    // Other getters (if needed)
-    public int getEmployeeId() {
-        return employeeId;
     }
 
     public String getName() {
         return name;
     }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public double getPayRate() {
-        return payRate;
-    }
-
-    public double getHoursWorked() {
-        return hoursWorked;
-    }
-    public void punchIn(double time){
-        this.punchInTime = time;
-        System.out.println("Punched in at: " + time);
-    }
-
-    public void punchIn(){
-        LocalDateTime current = LocalDateTime.now();
-        this.punchInTime = current.getHour() + current.getMinute() / 60.0;
-        System.out.println("Punched in at: " + punchInTime);
-    }
-    public void punchOut(double time){
-        this.punchOutTime = time;
-        System.out.println("Punched out at: " + time);
-    }
-
-    public void punchOut(){
-        LocalDateTime current = LocalDateTime.now();
-        this.punchOutTime = current.getHour() + current.getMinute() / 60.0;
-        System.out.println("Automatically punched out at: " + punchOutTime);
-    }
-
 }
