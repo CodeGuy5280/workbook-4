@@ -7,6 +7,7 @@ public class Room {
     private boolean Occupied;
     private boolean Dirty;
 
+
     public Room(int numberOfBeds, double price, boolean isOccupied, boolean isDirty) {
         this.NumberOfBeds = numberOfBeds;
         this.Price = price;
@@ -32,5 +33,27 @@ public class Room {
 
     public double getPrice() {
         return Price;
+    }
+
+    public boolean checkIn() {
+        if (!Occupied && !Dirty) {
+            Occupied = false;
+            Dirty = false;
+        }
+        return false;
+
+    }
+
+    public boolean checkOut() {
+        if (Occupied == true) {
+        }
+        return false;
+    }
+
+    public boolean cleanRoom() {
+        if (!Occupied) {
+            Dirty = false;
+        }
+        return true;
     }
 }

@@ -1,5 +1,7 @@
 package com.pluralsight;
 
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.Scanner;
 
 public class Main {
@@ -8,7 +10,7 @@ public class Main {
         //Create Room
         Room room = new Room(2, 170, false, false);
 
-        //Print details
+        //Print statments
         System.out.println("Beds: " + room.getNumberOfBeds());
         System.out.println("Price: $" + room.getPrice());
         System.out.println("Occupied: " + room.isOccupied());
@@ -18,7 +20,7 @@ public class Main {
         // Create Reservation
         Reservation reservation = new Reservation("king", 3, true);
 
-        // Print details
+        // Print statement
         System.out.println("Room Type: " + reservation.getRoomType());
         System.out.println("Price per Night: $" + reservation.getPrice());
         System.out.println("Number of Nights: " + reservation.getNumberOfNights());
@@ -26,10 +28,33 @@ public class Main {
         System.out.println("Total Reservation Cost: $" + reservation.getReservationTotal());
         Employee emp = new Employee(101, "Jane Doe", "Engineering", 25.0, 45);
 
-        //Print details
+        //Print statement
         System.out.println("Employee: " + emp.getName());
         System.out.println("Regular Hours: " + emp.getRegularHours());
         System.out.println("Overtime Hours: " + emp.getOvertimeHours());
         System.out.println("Total Pay: $" + emp.getTotalPay());
+
+
+        //print statements
+
+        if (room.checkIn()) {
+            System.out.println("Guest has successfully checked in.");
+        } else {
+            System.out.println("Check-in failed. Room may be dirty or already occupied.");
+        }
+
+        // Guest checks out
+        if (room.checkOut()) {
+            System.out.println("Guest has checked out.");
+        }
+
+        // Clean the room
+        room.cleanRoom();
+        System.out.println("Room has been cleaned.");
+
+        // Try to check in again
+        if (room.checkIn()) {
+            System.out.println("Another guest has successfully checked in.");
+        }
     }
 }

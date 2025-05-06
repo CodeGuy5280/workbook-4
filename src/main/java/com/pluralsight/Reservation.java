@@ -12,7 +12,7 @@ public class Reservation {
         this.numberOfNights = numberOfNights;
         this.isWeekend = isWeekend;
 
-        this.price = roomType.equalsIgnoreCase("king") ? 139.00 : 124.00;
+        this.price = roomType.equalsIgnoreCase("king") ? 139 : 142;
         if (isWeekend) {
             this.price *= 1.10;
         }
